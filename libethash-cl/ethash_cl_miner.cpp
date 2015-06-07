@@ -233,9 +233,7 @@ bool ethash_cl_miner::init(
 		m_workgroup_size = ((workgroup_size + 7) / 8) * 8;
 
 		// patch source code
-		std::ifstream t("ethash_cl_miner_kernel.cl");
-		std::string code((std::istreambuf_iterator<char>(t)),
-			std::istreambuf_iterator<char>());
+		std::string code(ETHASH_CL_MINER_KERNEL, ETHASH_CL_MINER_KERNEL + ETHASH_CL_MINER_KERNEL_SIZE);
 		add_definition(code, "GROUP_SIZE", m_workgroup_size);
 		add_definition(code, "DAG_SIZE", (unsigned)(_dagSize / ETHASH_MIX_BYTES));
 		add_definition(code, "ACCESSES", ETHASH_ACCESSES);
